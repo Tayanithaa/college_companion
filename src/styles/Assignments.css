@@ -1,0 +1,103 @@
+/* Container for the whole assignments section */
+.assignments-container {
+    padding: 20px;
+    background: #f4f7fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Title for the section */
+  h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Add Assignment Form */
+  .assignment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .assignment-form input,
+  .assignment-form select,
+  .assignment-form button {
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    outline: none;
+  }
+  
+  .assignment-form input:focus,
+  .assignment-form select:focus,
+  .assignment-form button:hover {
+    border-color: #ff6347;
+  }
+  
+  /* Assignment List */
+  .assignment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .assignment-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .assignment-details h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .assignment-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .status {
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .status.pending {
+    background-color: #ffbc00;
+    color: white;
+  }
+  
+  .status.completed {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  button {
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  

@@ -1,0 +1,66 @@
+.pomodoro-container {
+  background-color: #fdf1c7;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  margin: 0 1rem;
+  font-size: 1rem;
+}
+
+.input-group input {
+  width: 60px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group button {
+  margin-left: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.input-group button:hover {
+  background-color: #0056b3;
+}
+
+.timer-display {
+  font-size: 4rem;
+  margin: 2rem 0;
+  color: #222;
+}
+
+.button-group button {
+  margin: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  background-color: #218838;
+}
