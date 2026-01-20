@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
@@ -9,23 +10,28 @@ import Timetable from './pages/Timetable';
 import Pomodoro from './pages/Pomodoro';
 import ExamCountdown from './pages/ExamCountdown';
 import HabitTracker from './pages/HabitTracker';
-import Profile from './pages/Profile'; // Added import for Profile component
+import Profile from './pages/Profile';
+import Notes from './pages/Notes';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tasks" element={<Tasks />} />
-        <Route path="/assignments" element={<Assignments />} />
-        <Route path="/timetable" element={<Timetable />} />
-        <Route path="/pomodoro" element={<Pomodoro />} />
-        <Route path="/exam-countdown" element={<ExamCountdown />} />
-        <Route path="/habit-tracker" element={<HabitTracker />} />
-        <Route path="/profile" element={<Profile />} /> {/* Added Profile route */}
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/assignments" element={<Assignments />} />
+          <Route path="/timetable" element={<Timetable />} />
+          <Route path="/pomodoro" element={<Pomodoro />} />
+          <Route path="/exam-countdown" element={<ExamCountdown />} />
+          <Route path="/habit-tracker" element={<HabitTracker />} />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

@@ -6,6 +6,10 @@ function Tasks() {
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("medium");
   const [editingIndex, setEditingIndex] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterPriority, setFilterPriority] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
 
   const [tasks, setTasks] = useState(() => {
     const saved = localStorage.getItem("tasks");
@@ -53,6 +57,7 @@ function Tasks() {
       dueDate,
       priority,
       completed: false,
+      createdAt: new Date().toISOString()
     };
 
     if (editingIndex !== null) {
@@ -89,13 +94,55 @@ function Tasks() {
     setEditingIndex(index);
   };
 
+  // Filter and sort tasks
+  const getFilteredAndSortedTasks = () => {
+    let filtered = tasks;
+
+    // Search filter
+    if (searchTerm) {
+      filtered = filtered.filter(t =>
+        t.text.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Priority filter
+    if (filterPriority !== "all") {
+      filtered = filtered.filter(t => t.priority === filterPriority);
+    }
+
+    // Status filter
+    if (filterStatus === "completed") {
+      filtered = filtered.filter(t => t.completed);
+    } else if (filterStatus === "pending") {
+      filtered = filtered.filter(t => !t.completed);
+    }
+
+    // Sort
+    const sorted = [...filtered].sort((a, b) => {
+      if (sortBy === "date") {
+        if (!a.dueDate) return 1;
+        if (!b.dueDate) return -1;
+        return new Date(a.dueDate) - new Date(b.dueDate);
+      } else if (sortBy === "priority") {
+        const priorityOrder = { high: 1, medium: 2, low: 3 };
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      } else if (sortBy === "name") {
+        return a.text.localeCompare(b.text);
+      }
+      return 0;
+    });
+
+    return sorted;
+  };
+
+  const filteredTasks = getFilteredAndSortedTasks();
   const completedCount = tasks.filter((t) => t.completed).length;
   const progress =
     tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0;
 
   return (
     <div className="tasks-container">
-      <h2>My Tasks</h2>
+      <h2>My Tasks 📝</h2>
 
       <div className="task-input">
         <input
@@ -122,29 +169,90 @@ function Tasks() {
         </button>
       </div>
 
-      <div className="progress-container">
-        <div className="progress-bar" style={{ width: `${progress}%` }} />
+      <div className="progress-section">
+        <div className="progress-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        </div>
+        <p className="progress-text">{progress}% Completed ({completedCount}/{tasks.length})</p>
       </div>
-      <p style={{ textAlign: "center" }}>{progress}% Completed</p>
+
+      {/* Search and Filter Section */}
+      <div className="filters-section">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="🔍 Search tasks..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        
+        <select
+          className="filter-select"
+          value={filterPriority}
+          onChange={(e) => setFilterPriority(e.target.value)}
+        >
+          <option value="all">All Priorities</option>
+          <option value="high">High Priority</option>
+          <option value="medium">Medium Priority</option>
+          <option value="low">Low Priority</option>
+        </select>
+
+        <select
+          className="filter-select"
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+        >
+          <option value="all">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+        </select>
+
+        <select
+          className="filter-select"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="date">Sort by Date</option>
+          <option value="priority">Sort by Priority</option>
+          <option value="name">Sort by Name</option>
+        </select>
+      </div>
 
       <ul className="task-list">
-        {tasks.map((t, index) => (
-          <li key={index} className={t.completed ? "completed" : ""}>
-            <div>
-              <span onClick={() => handleToggleComplete(index)}>
-                {t.text}
-              </span>{" "}
-              <span className="priority-label">
-                • <span className={`priority ${t.priority}`}>{t.priority}</span>
-              </span>{" "}
-              <span> (Due: {t.dueDate || "N/A"})</span>
-            </div>
-            <div>
-              <button onClick={() => handleEdit(index)}>✏️</button>
-              <button onClick={() => handleDelete(index)}>🗑️</button>
-            </div>
-          </li>
-        ))}
+        {filteredTasks.length > 0 ? (
+          filteredTasks.map((t, index) => {
+            const originalIndex = tasks.indexOf(t);
+            return (
+              <li key={originalIndex} className={t.completed ? "completed" : ""}>
+                <div className="task-content">
+                  <input
+                    type="checkbox"
+                    checked={t.completed}
+                    onChange={() => handleToggleComplete(originalIndex)}
+                    className="task-checkbox"
+                  />
+                  <span className="task-text" onClick={() => handleToggleComplete(originalIndex)}>
+                    {t.text}
+                  </span>
+                  <span className="task-meta">
+                    <span className={`priority-badge ${t.priority}`}>
+                      {t.priority}
+                    </span>
+                    <span className="due-date">
+                      {t.dueDate ? new Date(t.dueDate).toLocaleDateString() : "No date"}
+                    </span>
+                  </span>
+                </div>
+                <div className="task-actions">
+                  <button onClick={() => handleEdit(originalIndex)} className="edit-btn">✏️</button>
+                  <button onClick={() => handleDelete(originalIndex)} className="delete-btn">🗑️</button>
+                </div>
+              </li>
+            );
+          })
+        ) : (
+          <p className="no-tasks">No tasks found. {searchTerm || filterPriority !== "all" || filterStatus !== "all" ? "Try adjusting your filters." : "Add a new task to get started!"}</p>
+        )}
       </ul>
     </div>
   );
