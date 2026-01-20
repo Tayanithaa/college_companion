@@ -56,6 +56,7 @@ function Home() {
 
     // Random quote
     setQuote(motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getGreeting = () => {

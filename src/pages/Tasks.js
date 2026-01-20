@@ -47,6 +47,7 @@ function Tasks() {
         });
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty array ensures it runs once
 
   const handleAddOrEdit = () => {

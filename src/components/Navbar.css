@@ -11,6 +11,7 @@
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease;
+  min-height: 60px;
 }
 
 .navbar-brand {
@@ -19,7 +20,8 @@
   gap: 10px;
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--text-color);
+  color: white;
+  flex-shrink: 0;
 }
 
 .brand-logo {
@@ -28,6 +30,7 @@
 
 .brand-name {
   display: none;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
@@ -38,22 +41,31 @@
 
 .navbar-links {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 15px;
+  flex-wrap: nowrap;
   justify-content: center;
   flex: 1;
   margin: 0 20px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.navbar-links::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .navbar-links a {
-  color: var(--text-color);
+  color: white;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   padding: 8px 12px;
   border-radius: 8px;
   transition: all 0.3s ease;
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .navbar-links a::after {
@@ -63,13 +75,13 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: var(--accent-color);
+  background: white;
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
 
 .navbar-links a:hover {
-  color: var(--accent-color);
+  color: white;
   background: var(--hover-bg);
 }
 
@@ -88,6 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .theme-toggle:hover {
@@ -96,20 +109,35 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navbar {
-    padding: 10px 15px;
-    flex-wrap: wrap;
+    padding: 10px 20px;
   }
 
   .navbar-links {
     gap: 10px;
-    margin: 10px 0;
+    margin: 0 10px;
   }
 
   .navbar-links a {
     font-size: 0.85rem;
     padding: 6px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar-links {
+    gap: 8px;
+    margin: 0 10px;
+  }
+
+  .navbar-links a {
+    font-size: 0.8rem;
+    padding: 6px 8px;
   }
 }
 
