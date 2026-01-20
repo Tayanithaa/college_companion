@@ -1,14 +1,14 @@
 .timetable-container {
-    background-color: #f9f9f9;
-    min-height: 100vh;
+    background-color: var(--bg-primary);
+    min-height: calc(100vh - 60px);
     padding: 2rem;
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
   }
   
-  h2 {
+  .timetable-container h2 {
     font-size: 2rem;
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
   }
   
@@ -19,18 +19,18 @@
   }
   
   .timetable th, .timetable td {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     padding: 0.5rem;
     text-align: center;
   }
   
   .timetable th {
-    background-color: #007bff;
+    background-color: var(--accent-color);
     color: white;
   }
   
   .timetable td {
-    background-color: #e9f2fb;
+    background-color: var(--bg-secondary);
   }
   
   .timetable-input {
@@ -40,10 +40,11 @@
     border: none;
     background: transparent;
     text-align: center;
+    color: var(--text-color);
   }
   
   .timetable-input:focus {
-    outline: 2px solid #007bff;
-    background-color: #fff;
+    outline: 2px solid var(--accent-color);
+    background-color: var(--bg-primary);
   }
   

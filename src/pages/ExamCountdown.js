@@ -40,7 +40,7 @@ const ExamCountdown = () => {
   };
 
   return (
-    <div>
+    <div className="exam-countdown-container">
       <h2>Exam Countdown</h2>
       <form onSubmit={handleSubmit}>
         <input

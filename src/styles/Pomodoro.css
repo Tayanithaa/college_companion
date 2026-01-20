@@ -1,15 +1,15 @@
 .pomodoro-container {
-  background-color: #fdf1c7;
-  min-height: 100vh;
+  background-color: var(--bg-primary);
+  min-height: calc(100vh - 60px);
   padding: 2rem;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
 }
 
-h2 {
+.pomodoro-container h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .input-group {
@@ -26,13 +26,15 @@ h2 {
   padding: 0.5rem;
   font-size: 1rem;
   margin-left: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
+  background: var(--bg-secondary);
+  color: var(--text-color);
 }
 
 .input-group button {
   margin-left: 1rem;
-  background-color: #007bff;
+  background-color: var(--info);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -41,13 +43,13 @@ h2 {
 }
 
 .input-group button:hover {
-  background-color: #0056b3;
+  opacity: 0.9;
 }
 
 .timer-display {
   font-size: 4rem;
   margin: 2rem 0;
-  color: #222;
+  color: var(--text-color);
 }
 
 .button-group button {
@@ -55,12 +57,12 @@ h2 {
   padding: 0.7rem 1.2rem;
   font-size: 1rem;
   border-radius: 6px;
-  background-color: #28a745;
+  background-color: var(--success);
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .button-group button:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }

@@ -2,9 +2,10 @@
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: #f7f7f7;
+    min-height: calc(100vh - 100px);
+    background: var(--bg-primary);
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
   }
   
   .add-habit {
@@ -17,35 +18,39 @@
     flex: 1;
     padding: 8px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-color);
   }
   
   .add-habit button {
     padding: 8px 16px;
     border: none;
-    background: #4caf50;
+    background: var(--success);
     color: white;
     border-radius: 6px;
     cursor: pointer;
   }
   
   .add-habit button:hover {
-    background: #45a049;
+    opacity: 0.9;
   }
   
-  table {
+  .habit-tracker table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
   }
   
-  th, td {
+  .habit-tracker th, .habit-tracker td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
   }
   
-  th {
-    background-color: #f0f0f0;
+  .habit-tracker th {
+    background-color: var(--accent-color);
+    color: white;
   }
   
   .fade-in {

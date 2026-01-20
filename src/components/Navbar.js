@@ -1,10 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <nav className="navbar">
@@ -25,9 +33,17 @@ function Navbar() {
         <Link to="/profile">Profile</Link>
       </div>
 
-      <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
-        {theme === 'light' ? '🌙' : '☀️'}
-      </button>
+      <div className="navbar-actions">
+        {currentUser && (
+          <span className="user-name">👤 {currentUser.name}</span>
+        )}
+        <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
+        <button className="logout-btn" onClick={handleLogout} title="Logout">
+          🚪 Logout
+        </button>
+      </div>
     </nav>
   );
 }
